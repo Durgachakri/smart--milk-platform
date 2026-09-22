@@ -1,4 +1,20 @@
 const db = require('../config/db.js');
+const { put } = require('@vercel/blob');
+
+const uploadImage = async (file) => {
+  if (!file) {
+    return null;
+  }
+
+  const fileName = `products/${Date.now()}-${file.originalname}`;
+
+  const blob = await put(fileName, file.buffer, {
+    access: 'public',
+    contentType: file.mimetype,
+  });
+
+  return blob.url;
+};
 
 const productController = {
   getAllProducts: async (req, res, next) => {
@@ -28,7 +44,7 @@ const productController = {
 
       let finalImageUrl = image_url || '/images/Buffalo_milk.png';
       if (req.file) {
-        finalImageUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+        finalImageUrl = await uploadImage(req.file);
       }
 
       const regularPrice = parseFloat(original_price) || parseFloat(price);
@@ -84,7 +100,7 @@ const productController = {
 
       let finalImageUrl = image_url;
       if (req.file) {
-        finalImageUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+        finalImageUrl = await uploadImage(req.file);
       }
 
       const regularPrice = parseFloat(original_price) || parseFloat(price);
