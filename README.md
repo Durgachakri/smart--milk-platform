@@ -166,20 +166,6 @@ MySQL Database
 Orders / Subscriptions / Products
 ```
 
-## 📸 Screenshots
-
-Add screenshots of your application here:
-
-```markdown
-![Home Page](screenshots/home.png)
-
-![Products Page](screenshots/products.png)
-
-![Cart Page](screenshots/cart.png)
-
-![Admin Dashboard](screenshots/admin.png)
-```
-
 ## 🎯 Project Highlights
 
 * Developed a complete full-stack dairy delivery platform.
